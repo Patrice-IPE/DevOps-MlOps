@@ -1,0 +1,53 @@
+services:
+
+  database:
+    build: ./database
+    networks:
+      - app-network-database
+    env_file:
+      - .env
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB} -h localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./simpleapi
+    networks:
+      - app-network-backend
+      - app-network-database
+    depends_on:
+      database:
+        condition: service_healthy
+    env_file:
+      - .env
+    restart: always
+    read_only: true
+    tmpfs:
+      - /tmp
+
+  httpd:
+    build: ./http-server
+    ports:
+      - "80:80"
+    networks:
+      - app-network-backend
+    depends_on:
+      - backend
+    restart: always
+    read_only: true
+    tmpfs:
+      - /usr/local/apache2/logs
+      - /tmp
+
+networks:
+  app-network-database:
+    internal: true
+  app-network-backend:
+
+volumes:
+  db-data:
