@@ -22,12 +22,7 @@ jobs:
           java-version: '21'
 
       - name: Build, test and SonarCloud analysis
-        run: mvn -B verify sonar:sonar \
-          -Dsonar.projectKey=Patrice-IPE_DevOps-MlOps \
-          -Dsonar.organization=patrice-ipe \
-          -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
-          --file ./cours-devops/simpleapi/pom.xml
+        run: mvn -B verify sonar:sonar -Dsonar.projectKey=Patrice-IPE_DevOps-MlOps -Dsonar.organization=patrice-ipe -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }} --file ./cours-devops/simpleapi/pom.xml
 
   build-and-push-docker-image:
     needs: test-backend
