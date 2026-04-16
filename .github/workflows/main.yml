@@ -21,8 +21,13 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: Build and test with Maven
-        run: mvn clean verify --file ./cours-devops/simpleapi/pom.xml
+      - name: Build, test and SonarCloud analysis
+        run: mvn -B verify sonar:sonar \
+          -Dsonar.projectKey=TON_PROJECT_KEY \
+          -Dsonar.organization=TON_ORGANIZATION \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+          --file ./cours-devops/simpleapi/pom.xml
 
   build-and-push-docker-image:
     needs: test-backend
