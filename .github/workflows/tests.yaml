@@ -35,9 +35,9 @@ jobs:
       # Sonar
       - name: SonarCloud analysis
         working-directory: ./cours-devops/simpleapi
-        run: mvn sonar:sonar -Dsonar.projectKey=Patrice-IPE_DevOps-MlOps -Dsonar.organization=patrice-ipe -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        run: mvn sonar:sonar -Dsonar.projectKey=Patrice-IPE_simple-api -Dsonar.organization=patrice-ipe -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
       # Quality Gate (optionnel mais recommandé)
       - name: Check Quality Gate
         working-directory: ./cours-devops/simpleapi
-        run: mvn sonar:sonar -Dsonar.qualitygate.wait=true -Dsonar.projectKey=Patrice-IPE_DevOps-MlOps -Dsonar.organization=patrice-ipe -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        run: mvn sonar:sonar -Dsonar.qualitygate.wait=true -Dsonar.projectKey=Patrice-IPE_simple-api -Dsonar.organization=patrice-ipe -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
