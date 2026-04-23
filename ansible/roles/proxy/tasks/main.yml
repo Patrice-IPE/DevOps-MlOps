@@ -1,0 +1,12 @@
+---
+# tasks file for roles/proxy
+- name: Run proxy
+  docker_container:
+    name: proxy
+    image: patriceipe/tp-devops-httpd:latest
+    state: started
+    restart_policy: always
+    ports:
+      - "80:80"
+    networks:
+      - name: app_network

@@ -1,0 +1,16 @@
+---
+# tasks file for roles/app
+- name: Run backend app
+  docker_container:
+    name: backend
+    image: patriceipe/tp-devops-backend:latest
+    state: started
+    restart_policy: always
+    env:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/db
+      SPRING_DATASOURCE_USERNAME: usr
+      SPRING_DATASOURCE_PASSWORD: pwd
+    ports:
+      - "8085:8080"
+    networks:
+      - name: app_network
