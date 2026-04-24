@@ -9,6 +9,9 @@ COPY yarn.lock .
 COPY default.conf .
 COPY .env.production .
 
+ARG VUE_APP_API_URL=patrice.ignongui.takima.school/api
+ENV VUE_APP_API_URL=$VUE_APP_API_URL
+
 RUN npm install
 RUN npm run build
 
