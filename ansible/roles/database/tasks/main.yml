@@ -3,12 +3,12 @@
 - name: Run database
   docker_container:
     name: database
-    image: ${{ dockerhub_username }}/tp-devops-database:latest
+    image: "{{ db_image }}"
     state: started
     restart_policy: always
     env:
-      POSTGRES_DB=db
-      POSTGRES_USER=usr
-      POSTGRES_PASSWORD=pwd
+      POSTGRES_DB: "{{ postgres_db }}"
+      POSTGRES_USER: "{{ postgres_user }}"
+      POSTGRES_PASSWORD: "{{ postgres_password }}"
     networks:
       - name: app_network

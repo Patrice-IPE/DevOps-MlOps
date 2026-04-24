@@ -3,7 +3,7 @@
 - name: Run proxy
   docker_container:
     name: proxy
-    image: ${{ dockerhub_username }}/tp-devops-httpd:latest
+    image: "{{ proxy_image }}"
     state: started
     restart_policy: always
     ports:

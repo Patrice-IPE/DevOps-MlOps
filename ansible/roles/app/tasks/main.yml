@@ -3,13 +3,13 @@
 - name: Run backend app
   docker_container:
     name: backend
-    image: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-backend:latest
+    image: "{{ backend_image }}"
     state: started
     restart_policy: always
     env:
       SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/db
-      SPRING_DATASOURCE_USERNAME: usr
-      SPRING_DATASOURCE_PASSWORD: pwd
+      SPRING_DATASOURCE_USERNAME: "{{postgres_user}}"
+      SPRING_DATASOURCE_PASSWORD: "{{postgres_password}}"
     ports:
       - "8085:8080"
     networks:

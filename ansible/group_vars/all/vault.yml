@@ -1,7 +1,14 @@
 # ansible/group_vars/all/vault.yml
-POSTGRES_PASSWORD: pwd
+postgres_db: db
+postgres_user: usr
+postgres_password: pwd
 
 dockerhub_username: patriceipe
+
+backend_image: "{{ dockerhub_username }}/tp-devops-backend:latest"
+db_image: "{{ dockerhub_username }}/tp-devops-database:latest"
+front_image: "{{ dockerhub_username }}/tp-devops-front:latest"
+httpd_image: "{{ dockerhub_username }}/tp-devops-httpd:latest"
 
 ssh_private_key: |
   -----BEGIN PRIVATE KEY-----
