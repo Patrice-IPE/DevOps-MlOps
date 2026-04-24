@@ -11,4 +11,4 @@
     ports:
       - "80:80"
     networks:
-      - name: mynetwork
+      - name: app_network
