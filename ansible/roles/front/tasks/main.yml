@@ -1,8 +1,8 @@
 ---
 # tasks file for roles/front
-- name: Run front
+- name: Run frontend
   docker_container:
-    name: frontend
+    name: front
     image: patriceipe/tp-devops-front:latest
     state: started
     restart_policy: always
