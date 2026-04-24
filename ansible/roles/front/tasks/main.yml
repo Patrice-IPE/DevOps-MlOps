@@ -1,10 +1,14 @@
 ---
 # tasks file for roles/front
-- name: Run frontend
+- name: Run proxy
   docker_container:
-    name: front
-    image: patriceipe/tp-devops-front:latest
+    name: proxy
+    image: "patriceipe/tp-devops-httpd:latest"
     state: started
+    recreate: true
+    pull: true
     restart_policy: always
+    ports:
+      - "80:80"
     networks:
-      - name: app_network
+      - name: mynetwork
