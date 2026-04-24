@@ -3,7 +3,7 @@
 - name: Run database
   docker_container:
     name: database
-    image: patriceipe/tp-devops-database:latest
+    image: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-database:latest
     state: started
     restart_policy: always
     env:

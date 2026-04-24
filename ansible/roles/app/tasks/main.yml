@@ -3,7 +3,7 @@
 - name: Run backend app
   docker_container:
     name: backend
-    image: patriceipe/tp-devops-backend:latest
+    image: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-backend:latest
     state: started
     restart_policy: always
     env:
