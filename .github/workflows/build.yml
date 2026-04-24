@@ -59,6 +59,30 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-database:${{ github.sha }}
             ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-database:v1.0.${{ github.run_number }}
 
+  build-frontend:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Login DockerHub
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # Build + push frontend
+      - name: Build and push frontend
+        uses: docker/build-push-action@v6
+        with:
+          context: ./cours-devops/front
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-front:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-front:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-front:v1.0.${{ github.run_number }}
 
   build-httpd:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
@@ -84,28 +108,3 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-httpd:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-httpd:${{ github.sha }}
             ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-httpd:v1.0.${{ github.run_number }}
-
-  build-frontend:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    runs-on: ubuntu-24.04
-
-    steps:
-      - uses: actions/checkout@v4
-
-      # Login DockerHub
-      - name: Login to DockerHub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      # Build + push frontend
-      - name: Build and push frontend
-        uses: docker/build-push-action@v6
-        with:
-          context: ./cours-devops/front
-          push: true
-          tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-front:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-front:${{ github.sha }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-front:v1.0.${{ github.run_number }}
