@@ -3,7 +3,7 @@
 - name: Run proxy
   docker_container:
     name: proxy
-    image: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-httpd:latest
+    image: ${{ dockerhub_username }}/tp-devops-httpd:latest
     state: started
     recreate: true
     pull: true
