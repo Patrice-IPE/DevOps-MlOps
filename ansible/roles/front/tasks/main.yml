@@ -1,0 +1,10 @@
+---
+# tasks file for roles/front
+- name: Run front
+  docker_container:
+    name: frontend
+    image: patriceipe/tp-devops-front:latest
+    state: started
+    restart_policy: always
+    networks:
+      - name: app_network
