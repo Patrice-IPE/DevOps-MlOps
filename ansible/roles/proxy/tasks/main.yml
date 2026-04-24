@@ -3,7 +3,7 @@
 - name: Run proxy
   docker_container:
     name: proxy
-    image: "{{ proxy_image }}"
+    image: "{{ httpd_image }}"
     state: started
     restart_policy: always
     ports:
